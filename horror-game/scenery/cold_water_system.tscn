@@ -1,0 +1,40 @@
+[gd_scene load_steps=6 format=3 uid="uid://c0t1e5fhk6vhu"]
+
+[ext_resource type="Texture2D" uid="uid://bss6mwy6cpmly" path="res://textures/matal.jpg" id="1_oxcyb"]
+[ext_resource type="Texture2D" uid="uid://07bstu5li41k" path="res://pictures/cold_system.png" id="2_oxcyb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vxkfl"]
+albedo_color = Color(0.406335, 0.281233, 1.44392e-07, 1)
+albedo_texture = ExtResource("1_oxcyb")
+metallic = 0.65
+metallic_specular = 0.0
+roughness = 0.3
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_t2pds"]
+radial_segments = 24
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uplfa"]
+size = Vector3(0.551674, 9.44718, 0.540314)
+
+[node name="cold_water_system" type="Node3D"]
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.531322, 0, 0, 0, 4.7048, 0, 0, 0, 0.531322, 0, 1.96909, 0)
+material_override = SubResource("StandardMaterial3D_vxkfl")
+mesh = SubResource("CylinderMesh_t2pds")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.745903, 0, 0, 0, 0.110151, 0, 0, 0, 0.731985, 0, 6.56897, 0)
+material_override = SubResource("StandardMaterial3D_vxkfl")
+mesh = SubResource("CylinderMesh_t2pds")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(-1, -8.74228e-08, 3.82137e-15, 0, -4.37114e-08, -1, 8.74228e-08, -1, 4.37114e-08, 0.0325325, 1.60202, -0.203591)
+size = Vector3(0.751706, 0.180191, 0.724785)
+texture_albedo = ExtResource("2_oxcyb")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.000880241, 1.98504, 0.00373842)
+shape = SubResource("BoxShape3D_uplfa")

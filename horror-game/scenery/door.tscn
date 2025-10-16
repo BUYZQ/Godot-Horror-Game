@@ -1,0 +1,111 @@
+[gd_scene load_steps=12 format=3 uid="uid://nqb8os3i6e6y"]
+
+[ext_resource type="Script" uid="uid://boef7x6pilykt" path="res://general_scripts/door.gd" id="1_l435u"]
+[ext_resource type="Texture2D" uid="uid://bxft34bnnea8y" path="res://textures/wood_trunk_wall_diff_4k.png" id="2_1fsns"]
+[ext_resource type="Material" uid="uid://bj5g4xjvs0nr3" path="res://materials/matal.tres" id="2_l435u"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m6kou"]
+albedo_texture = ExtResource("2_1fsns")
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_m6kou"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4owcv"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ekvfs"]
+radial_segments = 24
+
+[sub_resource type="Animation" id="Animation_5l6mc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1v2xm"]
+resource_name = "open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 1.5708, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_1fsns"]
+resource_name = "locked"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("hinge:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.49, 0.76, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, -0.02617994, 0), Vector3(0, 0.017453292, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_chdri"]
+_data = {
+&"RESET": SubResource("Animation_5l6mc"),
+&"locked": SubResource("Animation_1fsns"),
+&"open": SubResource("Animation_1v2xm")
+}
+
+[node name="door" type="Node3D"]
+script = ExtResource("1_l435u")
+
+[node name="hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.618169, 1.05721, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="hinge"]
+transform = Transform3D(1.26039, 0, 0, 0, 2.24, 0, 0, 0, 0.0671272, 0.618169, 0.0254072, 0)
+material_override = SubResource("StandardMaterial3D_m6kou")
+mesh = SubResource("BoxMesh_m6kou")
+skeleton = NodePath("../..")
+
+[node name="door" type="StaticBody3D" parent="hinge/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hinge/MeshInstance3D/door"]
+shape = SubResource("BoxShape3D_4owcv")
+
+[node name="knob" type="Node3D" parent="hinge"]
+transform = Transform3D(0.999848, 0, 0.0174524, 0, 1, 0, -0.0174524, 0, 0.999848, 0.618169, -1.05721, 0.00659555)
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="hinge/knob"]
+transform = Transform3D(0.106941, 0, 0, 0, -5.48834e-09, -0.106941, 0, 0.125558, -4.67454e-09, 0.42776, 0.877421, 0.00152778)
+material_override = ExtResource("2_l435u")
+mesh = SubResource("CylinderMesh_ekvfs")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="hinge/knob"]
+transform = Transform3D(0.137261, 0, 0, 0, -1.36881e-09, -0.136586, 0, 0.0313148, -5.97037e-09, 0.42776, 0.877421, 0.153626)
+material_override = ExtResource("2_l435u")
+mesh = SubResource("CylinderMesh_ekvfs")
+skeleton = NodePath("../../..")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="hinge/knob"]
+transform = Transform3D(0.137261, 0, 0, 0, -1.36881e-09, -0.136586, 0, 0.0313148, -5.97037e-09, 0.42776, 0.877421, -0.145367)
+material_override = ExtResource("2_l435u")
+mesh = SubResource("CylinderMesh_ekvfs")
+skeleton = NodePath("../../..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_chdri")
+}

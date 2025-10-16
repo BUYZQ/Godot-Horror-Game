@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cfd12r22gevy8"]
+
+[ext_resource type="Texture2D" uid="uid://bss6mwy6cpmly" path="res://textures/matal.jpg" id="1_xrb7e"]
+[ext_resource type="Material" uid="uid://bj5g4xjvs0nr3" path="res://materials/matal.tres" id="2_avy3q"]
+[ext_resource type="Texture2D" uid="uid://cwukukmgdyspk" path="res://pictures/power.png" id="3_avy3q"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tyvng"]
+albedo_color = Color(0.552956, 0.552956, 0.552956, 1)
+albedo_texture = ExtResource("1_xrb7e")
+metallic = 0.4
+metallic_specular = 0.3
+roughness = 0.0
+uv1_offset = Vector3(0, 0.5, 0)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i0sv4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2850c"]
+albedo_color = Color(0.377919, 0.377919, 0.377919, 1)
+albedo_texture = ExtResource("1_xrb7e")
+albedo_texture_force_srgb = true
+metallic = 0.4
+metallic_specular = 0.3
+roughness = 0.0
+uv1_scale = Vector3(2.99, 0.685, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_xrb7e"]
+size = Vector3(0.649536, 2.19257, 1.70111)
+
+[node name="powerbox" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.564439, 0, 0, 0, 2.20194, 0, 0, 0, 1.67761, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_tyvng")
+mesh = SubResource("BoxMesh_i0sv4")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.119539, 0, 0, 0, 0.392329, 0, 0, 0, 0.137749, 0.362488, 0, -0.58637)
+material_override = ExtResource("2_avy3q")
+mesh = SubResource("BoxMesh_i0sv4")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.074027, 0, 0, 0, 2.05931, 0, 0, 0, 1.56894, 0.295007, 0, 0)
+material_override = SubResource("StandardMaterial3D_2850c")
+mesh = SubResource("BoxMesh_i0sv4")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0358276, 0.0165753, -0.000579834)
+visible = false
+shape = SubResource("BoxShape3D_xrb7e")
+
+[node name="Decal" type="Decal" parent="."]
+transform = Transform3D(-3.2708e-08, -0.748273, 0, -3.2708e-08, 1.42971e-15, -0.748273, 0.748273, -3.2708e-08, -3.2708e-08, 0.115121, 0.068289, 0.0179375)
+size = Vector3(1.21924, 0.779785, 1.31989)
+texture_albedo = ExtResource("3_avy3q")

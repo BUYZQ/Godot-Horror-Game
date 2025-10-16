@@ -1,0 +1,97 @@
+[gd_scene load_steps=15 format=3 uid="uid://dbuah0yqapr3d"]
+
+[ext_resource type="Texture2D" uid="uid://btdp53l25gxxy" path="res://icon.svg" id="1_80vhd"]
+[ext_resource type="PackedScene" uid="uid://n0mmfqrru0nf" path="res://player/player.tscn" id="2_hjsbj"]
+[ext_resource type="PackedScene" uid="uid://crnw31brdbqvu" path="res://scenery/house.tscn" id="3_cwqvt"]
+
+[sub_resource type="Gradient" id="Gradient_5mrsh"]
+offsets = PackedFloat32Array(0, 0.72516555, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.5264901, 0.5264901, 0.5264901, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_safpt"]
+gradient = SubResource("Gradient_5mrsh")
+
+[sub_resource type="Gradient" id="Gradient_cwqvt"]
+offsets = PackedFloat32Array(0, 0.3138686, 0.5510949, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1, 0.065965496, 0.06282546, 0.07363971, 1, 0.18559879, 0.37809134, 0.61572367, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5mrsh"]
+noise_type = 0
+seed = -20
+frequency = 0.0165
+fractal_lacunarity = 2.48
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_safpt"]
+noise = SubResource("FastNoiseLite_5mrsh")
+color_ramp = SubResource("Gradient_cwqvt")
+seamless = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hjsbj"]
+sky_top_color = Color(0.072612904, 0.077095695, 0.6133505, 1)
+sky_horizon_color = Color(0.16773024, 0.2513181, 0.41816208, 1)
+sky_cover = SubResource("NoiseTexture2D_safpt")
+ground_bottom_color = Color(0.00022033055, 0.05635708, 0.3007433, 1)
+ground_horizon_color = Color(0.16862746, 0.2509804, 0.41960785, 1)
+sun_angle_max = 8.18
+
+[sub_resource type="Sky" id="Sky_cwqvt"]
+sky_material = SubResource("ProceduralSkyMaterial_hjsbj")
+
+[sub_resource type="Environment" id="Environment_5mrsh"]
+background_mode = 2
+sky = SubResource("Sky_cwqvt")
+tonemap_mode = 3
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_read_sky_light = false
+sdfgi_cascades = 2
+glow_enabled = true
+glow_levels/2 = 0.92
+glow_bloom = 0.09
+glow_blend_mode = 1
+fog_enabled = true
+fog_light_color = Color(0.99116415, 0.99116427, 0.99116415, 1)
+fog_light_energy = 0.0
+fog_aerial_perspective = 0.435
+fog_sky_affect = 0.93
+adjustment_enabled = true
+adjustment_brightness = 1.2
+adjustment_saturation = 1.1
+adjustment_color_correction = SubResource("GradientTexture2D_safpt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hjsbj"]
+albedo_texture = ExtResource("1_80vhd")
+uv1_scale = Vector3(6, 4, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_umreq"]
+size = Vector3(15, 1, 15)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_80vhd"]
+size = Vector3(15, 1, 15)
+
+[node name="Level" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_5mrsh")
+
+[node name="floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="floor"]
+transform = Transform3D(1.00008, 0, 0, 0, 1.00008, 0, 0, 0, 1.00008, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_hjsbj")
+mesh = SubResource("BoxMesh_umreq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="floor"]
+transform = Transform3D(0.987228, 0, 0, 0, 0.987228, 0, 0, 0, 0.987228, 0, 0, 0)
+shape = SubResource("BoxShape3D_80vhd")
+
+[node name="Player" parent="." instance=ExtResource("2_hjsbj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5579, 0)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.84896636, 0.4103271, -0.33299816, -0.11746895, 0.76091385, 0.63813084, 0.5152254, -0.5026347, 0.6941911, 0, 4.60745, -0.41216975)
+light_specular = 0.0
+shadow_enabled = true
+
+[node name="house" parent="." instance=ExtResource("3_cwqvt")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 3.01983, 2.74342, -14.5491)

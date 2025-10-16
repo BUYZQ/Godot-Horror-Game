@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://lw0pmotcqxhv"]
+
+[ext_resource type="Texture2D" uid="uid://dc265xoy36dss" path="res://textures/gold.jpg" id="1_23ncm"]
+
+[resource]
+albedo_texture = ExtResource("1_23ncm")
+metallic = 0.5
+roughness = 0.35
+uv1_scale = Vector3(0.485, 1, 1)

@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://d15gpx4vdn5tq"]
+
+[node name="TaskUi" type="CanvasLayer"]
+
+[node name="Header" type="RichTextLabel" parent="."]
+offset_left = 1049.0
+offset_top = -2.0
+offset_right = 1413.0
+offset_bottom = 116.0
+theme_override_font_sizes/normal_font_size = 25
+text = "Задача:"
+
+[node name="TaskText" type="RichTextLabel" parent="."]
+offset_left = 784.0
+offset_top = 32.0
+offset_right = 1150.0
+offset_bottom = 116.0
+theme_override_font_sizes/normal_font_size = 20
+text = "Пример текста для задания"
+text_direction = 2

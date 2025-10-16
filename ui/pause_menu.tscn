@@ -1,0 +1,73 @@
+[gd_scene load_steps=2 format=3 uid="uid://xm26eacg42ei"]
+
+[ext_resource type="Texture2D" uid="uid://bavyanls8w8ph" path="res://textures/menu_background.png" id="1_50142"]
+
+[node name="PauseMenu" type="CanvasLayer"]
+layer = 2
+
+[node name="MenuBackground" type="Sprite2D" parent="."]
+position = Vector2(206.5, 323.50003)
+scale = Vector2(1.425087, 3.0469484)
+texture = ExtResource("1_50142")
+
+[node name="ColorRect2" type="ColorRect" parent="."]
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -742.0
+offset_right = -738.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_right = 418.0
+offset_bottom = 92.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_font_sizes/normal_font_size = 60
+bbcode_enabled = true
+text = "[center]Пауза"
+
+[node name="Resume" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 123.0
+offset_right = 376.0
+offset_bottom = 200.0
+theme_override_font_sizes/font_size = 50
+text = "Продолжить"
+
+[node name="Srttings" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 219.0
+offset_right = 376.0
+offset_bottom = 296.0
+theme_override_font_sizes/font_size = 50
+text = "Настройки"
+
+[node name="Management" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 316.0
+offset_right = 376.0
+offset_bottom = 393.0
+theme_override_font_sizes/font_size = 50
+text = "Управление"
+
+[node name="MainMenu" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 415.0
+offset_right = 376.0
+offset_bottom = 492.0
+theme_override_font_sizes/font_size = 44
+text = "Главное меню"
+
+[node name="QuitGame" type="Button" parent="."]
+offset_left = 48.0
+offset_top = 514.0
+offset_right = 379.0
+offset_bottom = 591.0
+theme_override_font_sizes/font_size = 42
+text = "Выйти из игры"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="Resume" to="." method="_on_button_pressed"]
