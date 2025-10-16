@@ -1,7 +1,0 @@
-[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cqutctnnfje8y"]
-
-[ext_resource type="Texture2D" uid="uid://o62au3aemmw6" path="res://textures/dark_wooden_planks_diff_4k.png" id="1_kfeee"]
-
-[resource]
-albedo_texture = ExtResource("1_kfeee")
-uv1_triplanar = true
